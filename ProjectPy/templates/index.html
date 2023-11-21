@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificador de Avaliação de Carros</title>
+    <style>
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Decisões Inteligentes: Classificador de Avaliação de Carros</h1>
+
+    <form action="/train" method="post">
+        <label for="classifier">Escolha o classificador:</label>
+        <select id="classifier" name="classifier">
+            <option value="knn">K-Nearest Neighbors</option>
+            <option value="svm">Support Vector Machine</option>
+            <option value="mlp">Multi-Layer Perceptron</option>
+            <option value="dt">Decision Tree</option>
+            <option value="rf">Random Forest</option>
+        </select>
+
+        <label for="param1">Compra:</label>
+        <select id="param1" name="param1" required>
+            <option value="vhigh">Muito Alta</option>
+            <option value="high">Alta</option>
+            <option value="med">Média</option>
+            <option value="low">Baixa</option>
+        </select>
+
+        <label for="param2">Custo de Manutenção:</label>
+        <select id="param2" name="param2" required>
+            <option value="vhigh">Muito Alto</option>
+            <option value="high">Alto</option>
+            <option value="med">Médio</option>
+            <option value="low">Baixo</option>
+        </select>
+
+        <label for="param3">Número de Portas:</label>
+        <select id="param3" name="param3" required>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5more">5 ou mais</option>
+        </select>
+
+        <label for="param4">Número de Pessoas:</label>
+        <select id="param4" name="param4" required>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="more">Mais</option>
+        </select>
+
+        <label for="param5">Tamanho do Porta-Malas:</label>
+        <select id="param5" name="param5" required>
+            <option value="small">Pequeno</option>
+            <option value="med">Médio</option>
+            <option value="big">Grande</option>
+        </select>
+
+        <label for="param6">Nível de Segurança:</label>
+        <select id="param6" name="param6" required>
+            <option value="low">Baixo</option>
+            <option value="med">Médio</option>
+            <option value="high">Alto</option>
+        </select>
+
+        <button type="submit">Treinar e Avaliar</button>
+    </form>
+</body>
+</html>
