@@ -2,6 +2,7 @@
 <html lang="pt-br">
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classificador de Avaliação de Carros</title>
@@ -14,6 +15,8 @@
 </head>
 <body>
     <h1>Decisões Inteligentes: Classificador de Avaliação de Carros</h1>
+
+    <div>O programa desenvolvido realiza classificação utilizando o conjunto de dados 'Car Evaluation' da UCI. A inteligência artificial treinada examina atributos como preço, custo de manutenção, número de portas e segurança para categorizar carros em diferentes níveis de aceitabilidade. Este projeto capacita a máquina a tomar decisões especializadas em relação à avaliação de carros, proporcionando uma análise detalhada das características que influenciam sua classificação.</div>
 
     <form action="/train" method="post">
         <label for="classifier">Escolha o classificador:</label>

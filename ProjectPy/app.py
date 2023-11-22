@@ -17,20 +17,15 @@ import seaborn as sns
 
 app = Flask(__name__)
 
-# Carregar o conjunto de dados "Car Evaluation" do repositório UCI
 car_evaluation = fetch_openml(name='car', version=3)
 
-# Data (pandas DataFrame)
 X = car_evaluation.data
 y = car_evaluation.target
 
-# Mapear colunas categóricas para valores numéricos
 categorical_cols = ['buying', 'maint', 'doors', 'persons', 'lug_boot', 'safety']
 
-# Dividir dados em conjuntos de treino e teste
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Função para treinar e avaliar modelos
 class MultiColumnLabelEncoder(BaseEstimator, TransformerMixin):
     def __init__(self, columns=None):
         self.columns = columns
@@ -62,7 +57,6 @@ def train_and_evaluate_model(classifier, X_train, y_train, X_test, y_test):
     f1 = f1_score(y_test, y_pred, average='macro')
     cm = confusion_matrix(y_test, y_pred)
 
-    # Adicionando gráficos
     plot_confusion_matrix(cm, pipeline.classes_)
 
     return accuracy, f1, cm
@@ -75,18 +69,15 @@ def plot_confusion_matrix(cm, classes):
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
     plt.title('Confusion Matrix')
-    plt.savefig('static/confusion_matrix.png')  # Salva a imagem no diretório 'static'
+    plt.savefig('static/confusion_matrix.png')
     plt.close()
 
-# Rotas
 @app.route('/')
 def index():
-    # Página inicial com formulário para seleção de classificador e parâmetros
     return render_template('index.html')
 
 @app.route('/train', methods=['POST'])
 def train():
-    # Obter dados do formulário
     classifier_name = request.form.get('classifier')
     param1 = request.form.get('param1')
     param2 = request.form.get('param2')
@@ -95,7 +86,6 @@ def train():
     param5 = request.form.get('param5')
     param6 = request.form.get('param6')
 
-    # Inicializar classificador selecionado
     if classifier_name == 'knn':
         classifier = KNeighborsClassifier(n_neighbors=5)
     elif classifier_name == 'svm':
@@ -107,10 +97,8 @@ def train():
     elif classifier_name == 'rf':
         classifier = RandomForestClassifier(n_estimators=100, max_depth=None, random_state=42)
 
-    # Treinar e avaliar o modelo
     accuracy, f1, cm = train_and_evaluate_model(classifier, X_train, y_train, X_test, y_test)
 
-    # Mostrar resultados na página
     return render_template('results.html', accuracy=accuracy, f1=f1, confusion_matrix=cm)
 
 if __name__ == '__main__':
